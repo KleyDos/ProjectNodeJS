@@ -4,9 +4,7 @@
   "description": "projectnodejs",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
+    "dev": "nodemon src/main.js --ext js --exec babel-node"
   },
   "repository": {
     "type": "git",
@@ -19,21 +17,175 @@
   },
   "homepage": "https://github.com/KleyDos/ProjectNodeJS#readme",
   "devDependencies": {
-    "vite": "^3.0.4"
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-arrow-functions": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.8.7",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "regenerator": true
+        }
+      ]
+    ],
+    "env": {
+      "debug": {
+        "sourceMaps": "inline",
+        "retainLines": true
+      }
+    }
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "arrowParens": "avoid",
+    "htmlWhitespaceSensitivity": "css",
+    "insertPragma": false,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": false,
+    "proseWrap": "preserve",
+    "quoteProps": "preserve",
+    "requirePragma": false,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false,
+    "printWidth": 150
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "globals": {
+      "wp": "readonly",
+      "axios": "writable",
+      "$": "writable"
+    },
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint",
+      "sourceType": "module",
+      "ecmaVersion": 2020
+    },
+    "rules": {
+      "no-debugger": 1,
+      "no-alert": 1,
+      "space-before-funtion-paren": 0,
+      "import/prefer-default-export": 0,
+      "no-restricted-syntax": [
+        2,
+        "ForInStatement",
+        "LabeledStatement",
+        "WithStatement"
+      ],
+      "no-unused-vars": [
+        1,
+        {
+          "ignoreSiblings": true,
+          "argsIgnorePattern": "res|next|^err|item|_|__"
+        }
+      ],
+      "import": 0,
+      "no-shadow": [
+        2,
+        {
+          "hoist": "functions",
+          "allow": [
+            "resolve",
+            "reject",
+            "done",
+            "next",
+            "err",
+            "error",
+            "state",
+            "getters",
+            "index",
+            "*.resolvers.js"
+          ]
+        }
+      ],
+      "no-return-assign": [
+        2,
+        "except-parens"
+      ],
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "no-param-reassign": [
+        1,
+        {
+          "props": false
+        }
+      ],
+      "arrow-body-style": [
+        2,
+        "as-needed"
+      ],
+      "no-unused-expressions": [
+        2,
+        {
+          "allowTaggedTemplates": true
+        }
+      ],
+      "comma-dangle": 0,
+      "max-len": 0,
+      "import/extensions": 0,
+      "no-underscore-dangle": 0,
+      "consistent-return": 0,
+      "no-useless-escape": "off",
+      "no-nested-ternary": 0,
+      "radix": 0,
+      "no-use-before-define": [
+        0,
+        {
+          "functions": false
+        }
+      ],
+      "prefer-const": [
+        1,
+        {
+          "destructuring": "all"
+        }
+      ],
+      "complexity": [
+        1,
+        22
+      ]
+    }
   },
   "dependencies": {
-    "bootstrap": "^5.2.0-beta1",
-    "esbuild": "^0.13.13",
-    "function-bind": "^1.1.1",
-    "has": "^1.0.3",
-    "is-core-module": "^2.8.0",
-    "nanoid": "^3.1.30",
-    "path-parse": "^1.0.7",
-    "picocolors": "^1.0.0",
-    "postcss": "^8.3.11",
-    "resolve": "^1.20.0",
-    "rollup": "^2.59.0",
-    "source-map-js": "^0.6.2",
-    "uuid": "^8.3.2"
+    "@babel/polyfill": "^7.11.5",
+    "@babel/runtime": "^7.11.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.1"
   }
 }
