@@ -22,7 +22,9 @@ router.get("/dos", function(req, res){
   res.send("hola mundodosssss!!!")
 })
 //crear las rutas para el blog
-
+router.get('/index', function (req, res) {
+  res.send('hola mundodosssss!!!')
+})
 
 app.use(router)
 
