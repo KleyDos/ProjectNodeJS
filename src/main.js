@@ -13,22 +13,49 @@ app.use(helmet())
 // routes
 const router = express.Router()
 router.get('/', function (req, res) {
-
   res.send('Hola mundo!!!')
-
 })
-router.get("/dos", function(req, res){
-
-  res.send("hola mundodosssss!!!")
-})
-//crear las rutas para el blog
-router.get('/index', function (req, res) {
+router.get('/dos', function (req, res) {
   res.send('hola mundodosssss!!!')
+})
+// crear las rutas para el blog
+const user = { fullname: '', username: '', password: '' }
+
+router.post('/register', function (req, res) {
+  try {
+    console.log('From backend register: ', req.body)
+    user.username = req.body.username
+    user.fullname = req.body.fullname
+    user.password = req.body.password
+    console.log('fullname', user.fullname)
+    console.log('username', user.username)
+    console.log('password', user.password)
+
+    return res.send('true')
+  } catch (error) {
+    console.log('Error', error)
+    return res.send('false')
+  }
+})
+
+router.post('/info', function (req, res) {
+  try {
+    
+    if (user.fullname === null || user.username === null) throw 'No hay datos en el localstorage'
+
+    return res.send({
+      fullname: user.fullname,
+      username: user.username
+    })
+  } catch (error) {
+    console.error('Error: ', error)
+    return res.send('false')
+  }
 })
 
 app.use(router)
 
 // start server
-app.listen(3001, function () {
+app.listen(3000, function () {
   console.log('Server runnig on opprt 3000')
 })
