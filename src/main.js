@@ -40,8 +40,7 @@ router.post('/register', function (req, res) {
 
 router.post('/info', function (req, res) {
   try {
-    
-    if (user.fullname === null || user.username === null) throw 'No hay datos en el localstorage'
+    if (user.fullname === '' || user.username === '') throw 'No hay datos en el localstorage'
 
     return res.send({
       fullname: user.fullname,
@@ -50,6 +49,36 @@ router.post('/info', function (req, res) {
   } catch (error) {
     console.error('Error: ', error)
     return res.send('false')
+  }
+})
+
+router.post('/logout', (req, res) => {
+  try {
+    user.username = ''
+    user.fullname = ''
+    user.password = ''
+console.log(user);
+    // user = { username: '', fullname: '' }
+
+    return res.send('true')
+  } catch (error) {
+    console.error('error: ', error)
+    return res.send('false')
+  }
+})
+
+router.post("/editar", (req, res) =>{
+  try {
+
+    user.username = req.body.username
+    user.fullname = req.body.fullname
+    console.log('fullname', user.fullname)
+    console.log('username', user.username)
+
+    return res.send("true")
+  } catch (error) {
+    console.error('Error: ', error)
+    return res.send("false")
   }
 })
 
