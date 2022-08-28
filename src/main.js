@@ -82,6 +82,21 @@ router.post("/editar", (req, res) =>{
   }
 })
 
+router.post('/add', (req, res) => {
+  try {
+    user.username = ''
+    user.fullname = ''
+    user.password = ''
+    console.log(user)
+    // user = { username: '', fullname: '' }
+
+    return res.send('true')
+  } catch (error) {
+    console.error('error: ', error)
+    return res.send('false')
+  }
+})
+
 app.use(router)
 
 // start server
