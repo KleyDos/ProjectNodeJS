@@ -136,5 +136,5 @@ app.use(router)
 
 // start server
 app.listen(3000, function () {
-  console.log('Server runnig on opprt 3000')
+  console.log('Server runnig on opprt 3001')
 })
