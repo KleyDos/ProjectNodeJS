@@ -81,17 +81,13 @@ router.post('/editar', (req, res) => {
   }
 })
 
-const blog = { titulo: '', historia: '', autor: '' }
+let blog = []
 
 router.post('/add', function (req, res) {
   try {
-    blog.titulo = req.body.titulo
-    blog.historia = req.body.historia
-    blog.autor = req.body.autor
-    console.log('titulo', blog.titulo)
-    console.log('historia', blog.historia)
-    console.log('autor', blog.autor)
+    blog.push(req.body)
 
+    console.log(blog)
     return res.send('true')
   } catch (error) {
     console.log('Error: ', error)
@@ -99,31 +95,42 @@ router.post('/add', function (req, res) {
   }
 })
 
-router.post('/delete', function (req, res) {
+router.post('/get', function (req, res) {
   try {
-    blog.titulo = req.body.titulo
-    console.log('Post Eliminado', postDelete)
-
-    this.posts = this.posts.filter(post => {
-      console.log('post iteración', post.titulo)
-      if (postDelete !== post.titulo) {
-        return true
-      }
-    })
-
-    console.table(this.posts)
-
-    localStorage.setItem('blog', JSON.stringify(this.posts))
-
-    // localStorage.removeItem("posts", JSON.stringify(this.posts));
-    return true
+    return res.send(blog)
   } catch (error) {
-    console.log('Error: ', error)
-    return false
+    console.error('Error: ', error)
+    return res.send('false')
   }
 })
 
+router.post('/delete', function (req, res) {
+  try {
+    const { id } = req.body
+    blog = blog.filter(post => {
+      console.log('post iteracion', post)
 
+      if (id !== post.metadata.id) {
+        return true
+      }
+    })
+    console.log('Mustra ID', id)
+    console.log('Cual req', req.body)
+
+    // console.log('Mostrar ID', id)
+    // // id = req.body.id.filter(post => {
+    // //   console.log('post iteración', post.id)
+    // //   if (postDelete !== post.id) {
+    // //     return true
+    //   }
+    // })
+
+    return res.send('true')
+  } catch (error) {
+    console.log('Error: ', error)
+    return res.send('false')
+  }
+})
 
 app.use(router)
 
